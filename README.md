@@ -1,4 +1,4 @@
-# go-handlers-template
+# go-fighter-jets
 This is a handlers template for a Go project
 
 ## Problem

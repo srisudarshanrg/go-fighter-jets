@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/srisudarshanrg/go-handlers-template/server/models"
-	"github.com/srisudarshanrg/go-handlers-template/server/render"
+	"github.com/srisudarshanrg/go-fighter-jets/server/models"
+	"github.com/srisudarshanrg/go-fighter-jets/server/render"
 )
 
 // Home is the handler for the home page

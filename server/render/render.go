@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/srisudarshanrg/go-handlers-template/server/config"
-	"github.com/srisudarshanrg/go-handlers-template/server/models"
+	"github.com/srisudarshanrg/go-fighter-jets/server/config"
+	"github.com/srisudarshanrg/go-fighter-jets/server/models"
 )
 
 var appConfig config.AppConfig

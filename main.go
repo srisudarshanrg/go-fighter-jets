@@ -7,12 +7,12 @@ import (
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/go-chi/chi"
-	"github.com/srisudarshanrg/go-handlers-template/server/config"
-	"github.com/srisudarshanrg/go-handlers-template/server/database"
-	"github.com/srisudarshanrg/go-handlers-template/server/functions"
-	"github.com/srisudarshanrg/go-handlers-template/server/handlers"
-	"github.com/srisudarshanrg/go-handlers-template/server/render"
-	"github.com/srisudarshanrg/go-handlers-template/server/validations"
+	"github.com/srisudarshanrg/go-fighter-jets/server/config"
+	"github.com/srisudarshanrg/go-fighter-jets/server/database"
+	"github.com/srisudarshanrg/go-fighter-jets/server/functions"
+	"github.com/srisudarshanrg/go-fighter-jets/server/handlers"
+	"github.com/srisudarshanrg/go-fighter-jets/server/render"
+	"github.com/srisudarshanrg/go-fighter-jets/server/validations"
 )
 
 const portNumber = ":{put_your_port_number_here}"

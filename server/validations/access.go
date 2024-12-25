@@ -1,6 +1,6 @@
 package validations
 
-import "github.com/srisudarshanrg/go-handlers-template/server/config"
+import "github.com/srisudarshanrg/go-fighter-jets/server/config"
 
 var appConfig config.AppConfig
 
