@@ -2,7 +2,7 @@ package handlers
 
 import "github.com/srisudarshanrg/go-fighter-jets/server/config"
 
-var AppConfig HandlerRepository
+var Repository HandlerRepository
 
 // HandlerRepository is the repository for the handlers package which contains the app config, database and session
 type HandlerRepository struct {
@@ -10,6 +10,6 @@ type HandlerRepository struct {
 }
 
 // RepositoryAccesshandlers provides the handlers package with access to the repository
-func RepositoryAccesshandlers(configSet HandlerRepository) {
-	AppConfig = configSet
+func RepositoryAccesshandlers(repoSet HandlerRepository) {
+	Repository = repoSet
 }

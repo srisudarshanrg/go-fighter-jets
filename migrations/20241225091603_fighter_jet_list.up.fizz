@@ -1,0 +1,13 @@
+create_table("jets") {
+    t.Column("id", "integer", {primary: true})
+    t.Column("jet_name", "string")
+    t.Column("manufacturer", "string")
+    t.Column("type", "string")
+    t.Column("year", "string")
+    t.Column("features", "string")
+    t.Column("number_built", "integer")
+    t.Column("role", "string")
+    t.Column("country", "string")
+    t.Column("image", "string")
+    t.Column("generation", "string")
+}

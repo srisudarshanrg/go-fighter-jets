@@ -2,13 +2,19 @@ package models
 
 import "time"
 
-// User is a model for a user object in a database, if the application includes authentication
-type User struct {
-	ID        int
-	Username  string
-	Email     string
-	Password  string
-	JoinDate  time.Time
-	CreatedAt time.Time
-	UpdatedAt time.Time
+// FighterJet is the struct for a jet in the database
+type FighterJet struct {
+	ID           int
+	JetName      string
+	Manufacturer string
+	Type         string
+	Year         string
+	Features     string
+	NumberBuilt  int
+	Role         string
+	Country      string
+	ImageLink    string
+	Generation   string
+	CreatedAt    *time.Time
+	UpdatedAt    *time.Time
 }

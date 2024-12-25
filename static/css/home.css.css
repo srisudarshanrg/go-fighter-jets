@@ -1,0 +1,27 @@
+body {
+    font-family: "Work Sans", sans-serif;
+}
+
+.all-jets {
+    text-align: center;
+    padding: 1% 0;
+}
+
+.row {
+    width: 100%;
+    padding: 1%;
+}
+
+.card-text {
+    text-align: start;
+    margin-bottom: 2%;
+}
+
+.field-name {
+    font-weight: 550;
+}
+
+div.card {
+    margin-left: auto;
+    margin-right: auto;
+}

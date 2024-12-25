@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"log"
 	"net/http"
 	"time"
@@ -11,16 +12,19 @@ import (
 	"github.com/srisudarshanrg/go-fighter-jets/server/database"
 	"github.com/srisudarshanrg/go-fighter-jets/server/functions"
 	"github.com/srisudarshanrg/go-fighter-jets/server/handlers"
+	"github.com/srisudarshanrg/go-fighter-jets/server/models"
 	"github.com/srisudarshanrg/go-fighter-jets/server/render"
 	"github.com/srisudarshanrg/go-fighter-jets/server/validations"
 )
 
-const portNumber = ":{put_your_port_number_here}"
+const portNumber = ":2121"
 
 var session *scs.SessionManager
 var appConfig config.AppConfig
 
 func main() {
+	gob.Register(models.FighterJet{})
+
 	// session
 	session = scs.New()
 	session.Cookie.Persist = true
@@ -71,10 +75,15 @@ func main() {
 func routes() http.Handler {
 	mux := chi.NewRouter()
 
+	// middleware
 	mux.Use(SessionLoadAndSave)
 
-	mux.Get("/", handlers.AppConfig.Home)
+	// routes for get requests
+	mux.Get("/", handlers.Repository.Home)
 
+	// routes for post requests
+
+	// routes for static files
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
 

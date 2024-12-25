@@ -18,7 +18,7 @@ func AppConfigAccessRender(a config.AppConfig) {
 }
 
 // RenderTemplate executes a template from the template cache based on the passed template name
-func RenderTemplate(w http.ResponseWriter, tmpl string, templateData models.TemplateData) error {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, templateData models.TemplateData) error {
 	var templateCache map[string]*template.Template
 	var err error
 
@@ -55,7 +55,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 
 	for _, file := range files {
 		templateName := filepath.Base(file)
-		templateSet, err := template.New(templateName).ParseFiles()
+		templateSet, err := template.New(templateName).ParseFiles(file)
 		if err != nil {
 			return templateCache, err
 		}

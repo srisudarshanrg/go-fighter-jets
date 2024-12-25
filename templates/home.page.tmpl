@@ -1,13 +1,34 @@
 {{template "base" .}}
 
 {{define "title"}}
-
+    Home
 {{end}}
 
 {{define "css"}}
-
+    <link rel="stylesheet" href="/static/css/home.css.css">
 {{end}}
 
 {{define "content"}}
-
+    <div class="all-jets">
+        <h1>All Jets</h1>
+        <div class="all-jets-container">
+            {{$jets := index .Data "jets"}}
+            <div class="row">
+                {{range $jet := $jets}}
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{$jet.ImageLink}}" class="card-img-top" alt="{{$jet.JetName}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$jet.JetName}}</h5>
+                                <h6 class="card-title">{{$jet.Generation}} Generation</h6>
+                                <p class="card-text"><span class="field-name">Manufacturer:</span> {{$jet.Manufacturer}}</p>
+                                <p class="card-text"><span class="field-name">Features:</span> {{$jet.Features}}</p>
+                                <a href="#" class="btn btn-primary" style="margin-top: 4%;">Know More</a>
+                            </div>
+                        </div>
+                    </div>
+                {{end}}
+            <div>
+        </div>
+    </div>
 {{end}}
