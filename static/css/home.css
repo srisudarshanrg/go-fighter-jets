@@ -21,8 +21,25 @@ body {
     font-weight: 550;
 }
 
-div.card {
+.card {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
+    transition: 0.3s;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+.results-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.search-results-container {
+    height: 40vh;
+    overflow-y: scroll;
 }

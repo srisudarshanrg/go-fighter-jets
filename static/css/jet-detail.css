@@ -1,0 +1,38 @@
+body {
+    font-family: "Work Sans", sans-serif;
+}
+
+.jet-details {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.jet-details img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.jet-details .img {
+    padding: 1%;
+    background-color: #fff;    
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.jet-details .text {
+    background-color: #fff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 1%;
+}
+
+.characteristics {
+    text-align: start;
+}
+
+.field-name {
+    font-weight: 550;
+}

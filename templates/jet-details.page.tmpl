@@ -1,0 +1,31 @@
+{{template "base" .}}
+
+{{define "title"}}
+
+{{end}}
+
+{{define "css"}}
+    <link rel="stylesheet" href="/static/css/jet-detail.css">
+{{end}}
+
+{{define "content"}}
+    <div class="jet-details">
+        {{$jet := index .Data "jetDetail"}}
+        <h1 style="margin-bottom: 1%;">{{$jet.JetName}} <a href="/" class="text-danger"><i class="fa-regular fa-circle-xmark"></i></a></h1>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 img">
+                <img src="{{$jet.ImageLink}}" alt="{{$jet.JetName}}">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text">
+                <p class="characteristics"><span class="field-name">Generation:</span> {{$jet.Generation}}</p>
+                <p class="characteristics"><span class="field-name">Manufacturer:</span> {{$jet.Manufacturer}}</p>
+                <p class="characteristics"><span class="field-name">Features:</span> {{$jet.Features}}</p>
+                <p class="characteristics"><span class="field-name">Role:</span> {{$jet.Role}}</p>
+                <p class="characteristics"><span class="field-name">Type:</span> {{$jet.Type}}</p>
+                <p class="characteristics"><span class="field-name">Year of Introduction:</span> {{$jet.Year}}</p>
+                <p class="characteristics"><span class="field-name">Number Built:</span> {{$jet.NumberBuilt}}</p>
+                <p class="characteristics"><span class="field-name">Country of Origin:</span> {{$jet.Country}}</p>
+            </div>
+        </div>
+    </div>
+{{end}}

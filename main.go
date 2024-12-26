@@ -80,8 +80,12 @@ func routes() http.Handler {
 
 	// routes for get requests
 	mux.Get("/", handlers.Repository.Home)
+	mux.Get("/fighter-category", handlers.Repository.FighterCategory)
+	mux.Get("/compare", handlers.Repository.Compare)
+	mux.Get("/jet-details", handlers.Repository.JetDetails)
 
 	// routes for post requests
+	mux.Post("/", handlers.Repository.HomePost)
 
 	// routes for static files
 	fileServer := http.FileServer(http.Dir("./static/"))

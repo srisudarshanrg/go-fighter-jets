@@ -14,7 +14,7 @@ type FighterJet struct {
 	Role         string
 	Country      string
 	ImageLink    string
-	Generation   string
+	Generation   float64
 	CreatedAt    *time.Time
 	UpdatedAt    *time.Time
 }

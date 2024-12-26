@@ -42,3 +42,21 @@ func (app *HandlerRepository) Compare(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 }
+
+// JetDetails is the handler for the jet details page
+func (app *HandlerRepository) JetDetails(w http.ResponseWriter, r *http.Request) {
+	jetInterface := app.AppConfig.Session.Get(r.Context(), "jetDetails")
+	jet, ok := jetInterface.(models.FighterJet)
+	if !ok {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+	}
+
+	data["jetDetail"] = jet
+	err := render.RenderTemplate(w, r, "jet-details.page.tmpl", models.TemplateData{
+		Data: data,
+	})
+	if err != nil {
+		log.Println(err)
+	}
+	app.AppConfig.Session.Remove(r.Context(), "jetDetails")
+}

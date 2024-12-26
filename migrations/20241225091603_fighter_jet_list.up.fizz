@@ -9,5 +9,5 @@ create_table("jets") {
     t.Column("role", "string")
     t.Column("country", "string")
     t.Column("image", "string")
-    t.Column("generation", "string")
+    t.Column("generation", "float")
 }
