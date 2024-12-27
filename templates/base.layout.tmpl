@@ -14,7 +14,7 @@
             {{block "css" .}} {{end}}
 
             <!-- favicon -->
-            <link rel="stylesheet" href="/static/img/favicon.png">
+            <link rel="icon" href="/static/img/favicon.png">
         </head>
 
         <body>
@@ -45,6 +45,20 @@
                     </div>
                 </div>                
             </nav>
+
+            {{if .Info}}
+                <div class="alert alert-info alert-dismissible fade show" role="alert" id="info" style="margin: 1%;">
+                    {{.Info}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin-top: 0;"></button>
+                </div>
+            {{end}}
+
+            {{if .Error}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin: 1%;">
+                    {{.Error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {{end}}
 
             {{block "content" .}}
 

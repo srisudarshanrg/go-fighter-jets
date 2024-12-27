@@ -86,6 +86,7 @@ func routes() http.Handler {
 
 	// routes for post requests
 	mux.Post("/", handlers.Repository.HomePost)
+	mux.Post("/compare", handlers.Repository.ComparePost)
 
 	// routes for static files
 	fileServer := http.FileServer(http.Dir("./static/"))

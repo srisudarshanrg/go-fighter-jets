@@ -3,7 +3,7 @@ create_table("jets") {
     t.Column("jet_name", "string")
     t.Column("manufacturer", "string")
     t.Column("type", "string")
-    t.Column("year", "string")
+    t.Column("year", "integer")
     t.Column("features", "string")
     t.Column("number_built", "integer")
     t.Column("role", "string")

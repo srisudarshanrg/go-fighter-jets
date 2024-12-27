@@ -1,0 +1,189 @@
+{{template "base" .}}
+
+{{define "title"}}
+    Compare Jets
+{{end}}
+
+{{define "css"}}
+    <link rel="stylesheet" href="/static/css/compare.css.css">
+{{end}}
+
+{{define "content"}}
+    <div class="compare">
+        <h1>Compare Aircraft</h1>
+        {{$jets := index .Data "jets"}}
+        <form method="post" style="text-align: center;">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <select class="form-select" name="fighterJet1" required>
+                        <option selected>First Jet</option>                        
+                        {{range $jet := $jets}}
+                            <option value="{{$jet.JetName}}">{{$jet.JetName}}</option>
+                        {{end}}
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <select class="form-select" name="fighterJet2" required>
+                        <option selected>Second Jet</option>
+                        {{range $jet := $jets}}
+                            <option value="{{$jet.JetName}}">{{$jet.JetName}}</option>
+                        {{end}}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="margin-top: 1%;">Compare <i class="fa-solid fa-jet-fighter"></i></button>
+        </form>
+
+        {{if index .PostData "first"}}
+            {{$first := index .PostData "first"}}
+            {{$second := index .PostData "second"}}
+            <div class="row" style="margin-top: 2%;">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-end">
+                    <!-- first jet brief info modal -->
+                    <div class="modal fade" id="figherJetBriefInfoModal-{{$first.ID}}" tabindex="-1" aria-labelledby="figherJetBriefInfoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="figherJetBriefInfoLabel">{{$first.JetName}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{$first.ImageLink}}" alt="{{$first.JetName}}" style="width: 100%; border-radius: 10px; margin-bottom: 2%;">
+                                    <p class="card-text"><span class="field-name">Generation:</span> {{$first.Generation}}</p>
+                                    <p class="card-text"><span class="field-name">Manufacturer:</span> {{$first.Manufacturer}}</p>
+                                    <p class="card-text"><span class="field-name">Features:</span> {{$first.Features}}</p>
+                                    <p class="card-text"><span class="field-name">Role:</span> {{$first.Role}}</p>
+                                    <p class="card-text"><span class="field-name">Type:</span> {{$first.Type}}</p>
+                                    <p class="card-text"><span class="field-name">Year of Introduction:</span> {{$first.Year}}</p>
+                                    <p class="card-text"><span class="field-name">Number Built:</span> {{$first.NumberBuilt}}</p>
+                                    <p class="card-text"><span class="field-name">Country of Origin:</span> {{$first.Country}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                    <form method="post">
+                                        <input type="hidden" name="jetDetailID" value="{{$first.ID}}">
+                                        <button type="submit" class="btn btn-primary">Detailed Info</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- first jet card -->
+                    <div class="card" style="width: 50%;">
+                        <img src="{{$first.ImageLink}}" class="card-img-top" alt="{{$first.JetName}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$first.JetName}}</h5>
+                            {{if gt $first.Generation $second.Generation}}
+                                <p class="card-text text-bg-success" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$first.Generation}}</p>
+                            {{else if eq $first.Generation $second.Generation}}
+                            <p class="card-text text-bg-primary" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$first.Generation}}</p>
+                            {{else}}
+                                <p class="card-title text-bg-danger" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$first.Generation}}</p>
+                            {{end}}
+
+                            <p class="card-text" style="margin-top: 7%;"><span class="field-name">Manufacturer:</span> {{$first.Manufacturer}}</p>
+                            <p class="card-text"><span class="field-name">Features:</span> {{$first.Features}}</p>
+                            <p class="card-text"><span class="field-name">Role:</span> {{$first.Role}}</p>
+                            <p class="card-text"><span class="field-name">Type:</span> {{$first.Type}}</p>
+                            <p class="card-text"><span class="field-name">Year of Introduction:</span> {{$first.Year}}</p>
+                            {{if gt $first.NumberBuilt $second.NumberBuilt}}
+                                <p class="card-text text-bg-success" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$first.NumberBuilt}}</p>
+                            {{else if eq $first.NumberBuilt $second.NumberBuilt}}
+                                <p class="card-text text-bg-primary" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$first.NumberBuilt}}</p>
+                            {{else}}
+                                <p class="card-title text-bg-danger" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$first.NumberBuilt}}</p>
+                            {{end}}
+                            <p class="card-text"><span class="field-name">Country of Origin:</span> {{$first.Country}}</p>
+                            <div class="btn-group" style="margin-top: 4%;">
+                                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#figherJetBriefInfoModal-{{$first.ID}}">Brief Info</button>
+                                <form method="post">
+                                    <input type="hidden" name="jetDetailID" value="{{$first.ID}}">
+                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Detailed Info</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-flex justify-content-start">
+                    <!-- second jet brief info modal -->
+                    <div class="modal fade" id="figherJetBriefInfoModal-{{$second.ID}}" tabindex="-1" aria-labelledby="figherJetBriefInfoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="figherJetBriefInfoLabel">{{$second.JetName}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{$second.ImageLink}}" alt="{{$second.JetName}}" style="width: 100%; border-radius: 10px; margin-bottom: 2%;">
+                                    <p class="card-text"><span class="field-name">Generation:</span> {{$second.Generation}}</p>
+                                    <p class="card-text"><span class="field-name">Manufacturer:</span> {{$second.Manufacturer}}</p>
+                                    <p class="card-text"><span class="field-name">Features:</span> {{$second.Features}}</p>
+                                    <p class="card-text"><span class="field-name">Role:</span> {{$second.Role}}</p>
+                                    <p class="card-text"><span class="field-name">Type:</span> {{$second.Type}}</p>
+                                    <p class="card-text"><span class="field-name">Year of Introduction:</span> {{$second.Year}}</p>
+                                    <p class="card-text"><span class="field-name">Number Built:</span> {{$second.NumberBuilt}}</p>
+                                    <p class="card-text"><span class="field-name">Country of Origin:</span> {{$second.Country}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                                    <form method="post">
+                                        <input type="hidden" name="jetDetailID" value="{{$second.ID}}">
+                                        <button type="submit" class="btn btn-primary">Detailed Info</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="width: 50%;">
+                        <img src="{{$second.ImageLink}}" class="card-img-top" alt="{{$second.JetName}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{$second.JetName}}</h5>
+                            {{if gt $second.Generation $first.Generation}}
+                                <p class="card-text text-bg-success" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$second.Generation}}</p>
+                            {{else if eq $second.Generation $first.Generation}}
+                                <p class="card-text text-bg-primary" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$second.Generation}}</p>
+                            {{else}}
+                                <p class="card-title text-bg-danger" style="padding: 1%; padding-left: 2%;"><span class="field-name">Generation:</span> {{$second.Generation}}</p>
+                            {{end}}
+
+                            <p class="card-text" style="margin-top: 7%;"><span class="field-name">Manufacturer:</span> {{$second.Manufacturer}}</p>
+                            <p class="card-text"><span class="field-name">Features:</span> {{$second.Features}}</p>
+                            <p class="card-text"><span class="field-name">Role:</span> {{$second.Role}}</p>
+                            <p class="card-text"><span class="field-name">Type:</span> {{$second.Type}}</p>
+                            <p class="card-text"><span class="field-name">Year of Introduction:</span> {{$second.Year}}</p>
+                            {{if gt $second.NumberBuilt $first.NumberBuilt}}
+                                <p class="card-text text-bg-success" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$second.NumberBuilt}}</p>
+                            {{else if eq $second.NumberBuilt $first.NumberBuilt}}
+                                <p class="card-text text-bg-primary" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$second.NumberBuilt}}</p>
+                            {{else}}
+                                <p class="card-title text-bg-danger" style="padding: 1%; padding-left: 2%;"><span class="field-name">Number Built:</span> {{$second.NumberBuilt}}</p>
+                            {{end}}
+                            <p class="card-text"><span class="field-name">Country of Origin:</span> {{$second.Country}}</p>
+                            <div class="btn-group" style="margin-top: 4%;">
+                                <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#figherJetBriefInfoModal-{{$second.ID}}">Brief Info</button>
+                                <form method="post">
+                                    <input type="hidden" name="jetDetailID" value="{{$second.ID}}">
+                                    <button type="submit" class="btn btn-primary" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">Detailed Info</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend">
+                <div class="greater">
+                    <i class="fa-solid fa-square text-success"></i> Better
+                </div>
+                <div class="equal">
+                    <i class="fa-solid fa-square text-primary"></i> Equal
+                </div>
+                <div class="lesser">
+                    <i class="fa-solid fa-square text-danger"></i> Lesser
+                </div>
+            </div>
+        {{end}}
+    </div>
+{{end}}

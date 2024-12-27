@@ -37,7 +37,15 @@ func (app *HandlerRepository) FighterCategory(w http.ResponseWriter, r *http.Req
 
 // Compare is the handler for the compare page
 func (app *HandlerRepository) Compare(w http.ResponseWriter, r *http.Request) {
-	err := render.RenderTemplate(w, r, "compare.page.tmpl", models.TemplateData{})
+	jets, err := functions.GetAllFighterJets()
+	if err != nil {
+		log.Println(err)
+	}
+
+	data["jets"] = jets
+	err = render.RenderTemplate(w, r, "compare.page.tmpl", models.TemplateData{
+		Data: data,
+	})
 	if err != nil {
 		log.Println(err)
 	}
@@ -49,14 +57,20 @@ func (app *HandlerRepository) JetDetails(w http.ResponseWriter, r *http.Request)
 	jet, ok := jetInterface.(models.FighterJet)
 	if !ok {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
 	}
 
+	link := app.AppConfig.Session.Get(r.Context(), "link").(string)
+
 	data["jetDetail"] = jet
+	data["link"] = link
 	err := render.RenderTemplate(w, r, "jet-details.page.tmpl", models.TemplateData{
 		Data: data,
 	})
 	if err != nil {
 		log.Println(err)
 	}
+
 	app.AppConfig.Session.Remove(r.Context(), "jetDetails")
+	app.AppConfig.Session.Remove(r.Context(), "link")
 }

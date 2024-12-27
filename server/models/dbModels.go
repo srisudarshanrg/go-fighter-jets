@@ -8,7 +8,7 @@ type FighterJet struct {
 	JetName      string
 	Manufacturer string
 	Type         string
-	Year         string
+	Year         int
 	Features     string
 	NumberBuilt  int
 	Role         string

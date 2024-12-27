@@ -1,0 +1,32 @@
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.compare {
+    padding: 1%;
+}
+
+.compare h1 {
+    text-align: center;
+}
+
+.field-name {
+    font-weight: 550;
+}
+
+.legend {
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: center;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.legend:hover {
+    cursor: pointer;
+    box-shadow: 0 0 50px rgb(100, 100, 100);
+    --webkit-box-shadow: 0 0 50px rgb(100, 100, 100);
+    transition: 0.3s;
+}
