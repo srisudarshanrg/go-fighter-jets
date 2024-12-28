@@ -1,6 +1,6 @@
 module github.com/srisudarshanrg/go-fighter-jets
 
-go 1.23
+go 1.23.1
 
 require (
 	github.com/alexedwards/scs/v2 v2.8.0
