@@ -1,11 +1,68 @@
 body {
     font-family: "Work Sans", sans-serif;
+    padding-bottom: 2%;
+}
+
+.row {
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
 }
 
 .generation {
     margin-top: 1%;
 }
 
-h1 {
-    text-align: center;
+.all-generations, .all-countries {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 2%;
+    gap: 2%;
+}
+
+.all-generations button, .all-countries button {
+    border: none;
+    width: 100%;
+    background-color: rgb(100, 100, 100);
+    padding: 0;
+    margin-top: 2%;
+}
+
+.all-generations div, .all-countries div {
+    padding: 2%;
+    height: 10vh;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.all-generations div:hover, .all-countries div:hover {
+    background-color: rgb(125, 125, 125);
+    transition: 0.3s;
+}
+
+.all-centuries {
+    padding-left: 2%;
+}
+
+.all-centuries div form button {
+    width: 100%;
+    border: none;
+    background-color: rgb(100, 100, 100);
+    color: #fff;
+    height: 10vh;
+    transition: 0.3s;
+}
+
+.all-centuries div form button:hover {
+    background-color: rgb(125, 125, 125);
+    transition: 0.3s;
+}
+
+#searchBox {
+    display: none;
 }

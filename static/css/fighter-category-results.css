@@ -1,0 +1,16 @@
+body {
+    font-family: "Work Sans", sans-serif;
+}
+
+#searchBox {
+    display: none;
+}
+
+.row {
+    width: 100%;
+    margin-top: 2%;
+}
+
+.card {
+    margin: 2% auto;
+}

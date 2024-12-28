@@ -52,6 +52,73 @@ func (app *HandlerRepository) HomePost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (app *HandlerRepository) FighterCategoryPost(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		log.Println(err)
+	}
+
+	generationName := r.Form.Get("generationName")
+	centuryName := r.Form.Get("centuryName")
+	countryName := r.Form.Get("countryName")
+
+	if generationName != "" {
+		generationNameFloat, err := strconv.ParseFloat(generationName, 64)
+		if err != nil {
+			log.Println(err)
+		}
+
+		jets, err := functions.GetJetsByGeneration(generationNameFloat)
+		if err != nil {
+			log.Println(err)
+		}
+
+		postData := map[string]interface{}{}
+		postData["generationJets"] = jets
+		err = render.RenderTemplate(w, r, "fighter-category-results.page.tmpl", models.TemplateData{
+			PostData: postData,
+		})
+		if err != nil {
+			log.Println(err)
+		}
+	} else if centuryName != "" {
+		var jets []models.FighterJet
+		if centuryName == "1900" {
+			jets, _, err = functions.GetJetsByCentury()
+			if err != nil {
+				log.Println(err)
+			}
+		} else {
+			_, jets, err = functions.GetJetsByCentury()
+			if err != nil {
+				log.Println(err)
+			}
+		}
+		postData := map[string]interface{}{}
+		postData["centuryJets"] = jets
+		err = render.RenderTemplate(w, r, "fighter-category-results.page.tmpl", models.TemplateData{
+			PostData: postData,
+		})
+		if err != nil {
+			log.Println(err)
+		}
+	} else if countryName != "" {
+		jets, err := functions.GetJetsByCountry(countryName)
+		if err != nil {
+			log.Println(err)
+		}
+
+		postData := map[string]interface{}{}
+		postData["countryJets"] = jets
+		err = render.RenderTemplate(w, r, "fighter-category-results.page.tmpl", models.TemplateData{
+			PostData: postData,
+		})
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
 func (app *HandlerRepository) ComparePost(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {

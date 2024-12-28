@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"sort"
 	"strings"
 	"time"
 
@@ -89,7 +90,6 @@ func GetFighterJetsBySearchKey(key string) ([]models.FighterJet, error) {
 	lower(jet_name) like $1 
 	or lower(manufacturer) like $1 
 	or lower(type) like $1
-	or year=$1
 	or lower(features) like $1
 	or lower(role) like $1
 	or lower(country) like $1`
@@ -190,16 +190,16 @@ func GetTwoFighterJetsForCompare(fighterJet1 string, fighterJet2 string) ([]mode
 }
 
 // GetDistinctGeneration gets distinct generations from the database
-func GetDistinctGeneration() ([]string, error) {
+func GetDistinctGeneration() ([]float64, error) {
 	getDistinctGenerationQuery := `select distinct generation from jets`
 	rows, err := db.Query(getDistinctGenerationQuery)
 	if err != nil {
 		return nil, err
 	}
 
-	var generationsList []string
+	var generationsList []float64
 	for rows.Next() {
-		var generation string
+		var generation float64
 
 		err = rows.Scan(&generation)
 		if err != nil {
@@ -208,6 +208,8 @@ func GetDistinctGeneration() ([]string, error) {
 
 		generationsList = append(generationsList, generation)
 	}
+
+	sort.Float64s(generationsList)
 
 	return generationsList, nil
 }

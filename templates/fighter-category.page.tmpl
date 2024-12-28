@@ -11,17 +11,65 @@
 {{define "content"}}
     <div class="generation">
         <h1>Generation-Wise</h1>
+        <div class="all-generations">
+            {{$generations := index .Data "distinctGenerations"}}
+            {{range $generations}}
+                <form method="post">
+                    <input type="hidden" name="generationName" value="{{.}}">
+                    <button type="submit">
+                        <div class="each-generation">
+                            {{.}}
+                        </div>
+                    </button>
+                </form>
+            {{end}}
+        </div>
     </div>
 
     <hr>
 
     <div class="year">
-        <h1>Year Wise</h1>
+        <h1>Year-Wise</h1>
+        <div class="row all-centuries">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <form method="post">
+                    <input type="hidden" name="centuryName" value="1900">
+                    <button type="submit">
+                        <div class="each-century">
+                            1900s
+                        </div>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <form method="post">
+                    <input type="hidden" name="centuryName" value="2000">
+                    <button type="submit">
+                        <div class="each-century">
+                            2000s
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <hr>
 
     <div class="country">
-        <h1>Country Wise</h1>
+        <h1>Country-Wise</h1>
+        {{$countries := index .Data "distinctCountries"}}
+        <div class="all-countries">
+            {{range $countries}}
+                <form method="post">
+                    <input type="hidden" name="countryName" value="{{.}}">
+                    <button type="submit">
+                        <div class="each-country">
+                            {{.}}
+                        </div>
+                    </button>
+                </form>
+            {{end}}
+        </div>
     </div>
 {{end}}

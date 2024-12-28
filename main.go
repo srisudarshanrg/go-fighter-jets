@@ -86,6 +86,7 @@ func routes() http.Handler {
 
 	// routes for post requests
 	mux.Post("/", handlers.Repository.HomePost)
+	mux.Post("/fighter-category", handlers.Repository.FighterCategoryPost)
 	mux.Post("/compare", handlers.Repository.ComparePost)
 
 	// routes for static files

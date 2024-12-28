@@ -29,7 +29,21 @@ func (app *HandlerRepository) Home(w http.ResponseWriter, r *http.Request) {
 
 // FighterCategory is the handler for the fighter category page
 func (app *HandlerRepository) FighterCategory(w http.ResponseWriter, r *http.Request) {
-	err := render.RenderTemplate(w, r, "fighter-category.page.tmpl", models.TemplateData{})
+	distinctGenerations, err := functions.GetDistinctGeneration()
+	if err != nil {
+		log.Println(err)
+	}
+
+	distinctCountries, err := functions.GetDistinctCountries()
+	if err != nil {
+		log.Println(err)
+	}
+
+	data["distinctGenerations"] = distinctGenerations
+	data["distinctCountries"] = distinctCountries
+	err = render.RenderTemplate(w, r, "fighter-category.page.tmpl", models.TemplateData{
+		Data: data,
+	})
 	if err != nil {
 		log.Println(err)
 	}

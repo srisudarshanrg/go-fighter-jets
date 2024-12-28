@@ -36,3 +36,7 @@ body {
 .field-name {
     font-weight: 550;
 }
+
+#searchBox {
+    display: none;
+}
