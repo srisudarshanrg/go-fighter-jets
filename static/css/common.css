@@ -18,6 +18,10 @@ nav {
     color: #fff;
 }
 
+.margin {
+    margin-left: 50px;
+}
+
 .right-end {
     margin-right: 1%;
 }
@@ -27,5 +31,9 @@ nav {
         margin-right: 0;
         margin-top: 3%;
         text-align: center;
+    }
+
+    .margin {
+        margin-left: 0;
     }
 }
